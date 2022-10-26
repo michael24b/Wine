@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from "react";
+import { Route, Routes, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Layout from "./components/Layout/Layout";
+import LoadingSpinner from "./components/UI/LoadingSpinner";
+import Wine from "./components/Wine/Wine";
+import AuthPage from "./pages/AuthPage";
+import WelcomePage from "./pages/WelcomePage";
 
 function App() {
+  const accessToken = useSelector((state) => state.sv.accessToken);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Suspense
+        fallback={
+          <div className="centeredDiv">
+            <LoadingSpinner />
+          </div>
+        }
+      >
+        <Routes>
+          {!accessToken && <Route path="/" element={<AuthPage />} />}
+          {accessToken && <Route path="/welcome" element={<WelcomePage />} />}
+          {accessToken && (
+            <Route path="/welcome/:wineId" element={<Wine />}></Route>
+          )}
+          {!accessToken && (
+            <Route path="*" element={<Navigate replace to="/" />} />
+          )}
+          {accessToken && (
+            <Route path="*" element={<Navigate replace to="/welcome" />} />
+          )}
+        </Routes>
+      </Suspense>
+    </Layout>
   );
 }
 

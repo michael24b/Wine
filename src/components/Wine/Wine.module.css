@@ -1,0 +1,79 @@
+.wineContainer {
+  width: 90%;
+  margin: 1rem auto;
+
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+li {
+  list-style: none;
+}
+
+.card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  background-color: white;
+  animation: wine-appear 1s ease-out forwards;
+  margin: 1rem;
+  width: 230px;
+  height: 330px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes wine-appear {
+  from {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.img {
+  height: 100%;
+}
+
+.imgDiv {
+  object-fit: contain;
+  height: 60%;
+  padding: 0.1rem 0;
+  margin: 0 auto;
+}
+
+.wineInfo {
+  margin: 12px;
+}
+
+.wineName {
+  max-width: 200px;
+  text-align: left;
+  font-size: 17px;
+  text-align: center;
+}
+
+.wineryName {
+  max-width: 200px;
+  text-align: left;
+  margin-top: 0.5rem;
+  color: rgb(129, 125, 125);
+  font-size: 13px;
+  text-align: center;
+}
+
+.wineRate {
+  position: absolute;
+  text-align: center;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 0.7rem;
+  font-size: 25px;
+}
